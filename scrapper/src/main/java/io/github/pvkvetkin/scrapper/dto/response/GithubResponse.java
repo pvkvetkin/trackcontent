@@ -2,7 +2,9 @@ package io.github.pvkvetkin.scrapper.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.github.pvkvetkin.scrapper.dto.LinkType;
+
 import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.Objects;
 
 public record GithubResponse(
@@ -27,10 +29,17 @@ public record GithubResponse(
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
+
         GithubResponse that = (GithubResponse) o;
-        return Objects.equals(lastCommitAt, that.lastCommitAt)
+
+        OffsetDateTime thisLastCommitAt = this.lastCommitAt.withOffsetSameInstant(ZoneOffset.UTC);
+        OffsetDateTime thisUpdatedAt = this.updatedAt.withOffsetSameInstant(ZoneOffset.UTC);
+        OffsetDateTime oLastCommitAt = that.lastCommitAt.withOffsetSameInstant(ZoneOffset.UTC);
+        OffsetDateTime oUpdatedAt = that.updatedAt.withOffsetSameInstant(ZoneOffset.UTC);
+
+        return Objects.equals(thisLastCommitAt, oLastCommitAt)
                && Objects.equals(issuesCount, that.issuesCount)
-               && Objects.equals(updatedAt, that.updatedAt);
+               && Objects.equals(thisUpdatedAt, oUpdatedAt);
     }
 
     @Override
