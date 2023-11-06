@@ -7,6 +7,7 @@
         <module>bot</module>
         <module>link-parser</module>
         <module>scrapper</module>
+        <module>scrapper-jooq</module>
     </modules>
     <groupId>io.github.pvkvetkin</groupId>
     <artifactId>trackcontent</artifactId>
