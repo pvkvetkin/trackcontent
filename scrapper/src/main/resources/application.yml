@@ -1,0 +1,23 @@
+app:
+  scheduler:
+    interval-ms: ${SCHEDULE_INTEVAL_MS:59000}
+  tg-bot-base-url: ${TG_BOT_BASE_URL:http://localhost:8081/}
+  rabbitmq:
+    exchange-name: ${EXCHANGE_NAME:scrapper}
+    queue-name: ${QUEUE_NAME:scrapper}
+springdoc:
+  swagger-ui:
+    path: /swagger-ui
+client:
+  github-url: https://api.github.com
+  stackoverflow-url: https://api.stackexchange.com
+spring:
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5433/scrapper}
+    username: ${DATABASE_USERNAME:postgres}
+    password: ${DATABASE_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+  liquibase:
+    enabled: false
+server:
+  port: ${SERVER_PORT:8080}
