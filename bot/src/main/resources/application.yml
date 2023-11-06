@@ -1,0 +1,10 @@
+tgbot:
+  bot:
+    token: ${TG_BOT_TOKEN:6885199325:AAGsGpsFkn93MoPK_fxa1SEW5tN0rHZAt0M}
+  scrapper:
+    url: ${SCRAPPER_BASE_URL:http://localhost:8080/}
+  rabbitmq:
+    exchange-name: ${EXCHANGE_NAME:scrapper}
+    queue-name: ${QUEUE_NAME:scrapper}
+server:
+  port: ${SERVER_PORT:8081}
