@@ -16,8 +16,8 @@ public class ScrapperClient {
     private final static String TG_CHAT_PATH = "/tg-chat/{id}";
     private final static String TG_CHAT_HEADER = "Tg-Chat-Id";
     private final static String LINKS_PATH = "/links";
+
     public ScrapperClient(String baseUrl) {
-        System.out.println(baseUrl);
         this.client = WebClient.create(baseUrl);
     }
 
