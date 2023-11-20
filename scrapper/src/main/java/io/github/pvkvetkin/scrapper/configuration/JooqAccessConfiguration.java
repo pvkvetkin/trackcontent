@@ -1,5 +1,6 @@
 package io.github.pvkvetkin.scrapper.configuration;
 
+import io.github.pvkvetkin.scrapper.metric.ScrapperProcessorMetric;
 import io.github.pvkvetkin.scrapper.repository.JooqChatRepository;
 import io.github.pvkvetkin.scrapper.repository.JooqLinkRepository;
 import io.github.pvkvetkin.scrapper.service.ChatService;
@@ -15,16 +16,17 @@ public class JooqAccessConfiguration {
 
     @Bean
     public ChatService chatService(
-            JooqChatRepository chatRepository
+        JooqChatRepository chatRepository
     ) {
         return new JooqChatService(chatRepository);
     }
 
     @Bean
     public LinkService linkService(
-            JooqLinkRepository linkRepository,
-            HttpContentLinkParser linkParser
+        JooqLinkRepository linkRepository,
+        HttpContentLinkParser linkParser,
+        ScrapperProcessorMetric processorMetric
     ) {
-        return new JooqLinkService(linkRepository, linkParser);
+        return new JooqLinkService(linkRepository, linkParser, processorMetric);
     }
 }

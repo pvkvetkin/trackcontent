@@ -9,6 +9,7 @@ import io.github.pvkvetkin.scrapper.dto.response.StackoverflowResponse;
 import io.github.pvkvetkin.scrapper.entity.Link;
 import io.github.pvkvetkin.scrapper.exception.InvalidUrlException;
 import io.github.pvkvetkin.scrapper.exception.LinkNotFoundException;
+import io.github.pvkvetkin.scrapper.metric.ScrapperProcessorMetric;
 import io.github.pvkvetkin.scrapper.repository.JooqLinkRepository;
 import io.github.pvkvetkin.scrapper.service.LinkService;
 import io.github.pvkvetkin.scrapper.service.parser.HttpContentLinkParser;
@@ -53,6 +54,8 @@ public class JooqLinkService implements LinkService {
             }
             default -> throw new IllegalStateException("Unexpected type value: " + type);
         }
+
+        processorMetric.incrementTrackedLinks();
         return new LinkResponse(linkId, uri);
     }
 
