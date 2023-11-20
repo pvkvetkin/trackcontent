@@ -9,7 +9,8 @@ import org.springframework.validation.annotation.Validated;
 public record ApplicationConfig(
     @NotNull TgBot bot,
     @NotNull Scrapper scrapper,
-    @NotNull Rabbitmq rabbitmq
+    @NotNull Rabbitmq rabbitmq,
+    @NotNull String oltpReceiverUrl
 ) {
 
     record TgBot(String token) {

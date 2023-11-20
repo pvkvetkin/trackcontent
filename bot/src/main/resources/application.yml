@@ -1,10 +1,42 @@
+server:
+  port: ${SERVER_PORT:8081}
+spring:
+  application:
+    name: tgbot-app
 tgbot:
   bot:
-    token: ${TG_BOT_TOKEN:6885199325:AAGsGpsFkn93MoPK_fxa1SEW5tN0rHZAt0M}
+    token: ${TG_BOT_TOKEN} #example 6885199325:AAGsGpsFkn93MoPK_fxa1SEW5tN0rHZAt0M
   scrapper:
     url: ${SCRAPPER_BASE_URL:http://localhost:8080/}
   rabbitmq:
     exchange-name: ${EXCHANGE_NAME:scrapper}
     queue-name: ${QUEUE_NAME:scrapper}
-server:
-  port: ${SERVER_PORT:8081}
+  oltp-receiver-url: ${OLTP_RECEIVER_URL:http://localhost:4317}
+management:
+  server:
+    port: ${SERVER_PORT:8083}
+  endpoints:
+    web:
+      base-path: /
+      exposure:
+        include: "info,health,prometheus"
+      path-mapping:
+        prometheus: metrics
+  metrics:
+    tags:
+      application: ${spring.application.name}
+  otlp:
+    metrics:
+      export:
+        url: http://localhost:4318/v1/metrics
+        step: 10s
+    tracing:
+      endpoint: http://localhost:4318/v1/traces
+      export:
+        step: 10s
+  tracing:
+    sampling:
+      probability: 1.0
+logging:
+  pattern:
+    level: '%5p[${spring.application.name:},%X{traceId:-},%X{spanId:-}]'
