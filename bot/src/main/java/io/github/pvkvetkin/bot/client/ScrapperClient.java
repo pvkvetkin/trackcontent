@@ -4,11 +4,11 @@ import io.github.pvkvetkin.bot.dto.request.AddLinksRequest;
 import io.github.pvkvetkin.bot.dto.request.RemoveLinksRequest;
 import io.github.pvkvetkin.bot.dto.response.LinkResponse;
 import io.github.pvkvetkin.bot.dto.response.ListLinksResponse;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.reactive.function.client.WebClient;
 
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class ScrapperClient {
 
     private final WebClient client;
@@ -16,10 +16,6 @@ public class ScrapperClient {
     private final static String TG_CHAT_PATH = "/tg-chat/{id}";
     private final static String TG_CHAT_HEADER = "Tg-Chat-Id";
     private final static String LINKS_PATH = "/links";
-
-    public ScrapperClient(String baseUrl) {
-        this.client = WebClient.create(baseUrl);
-    }
 
     public void registerChat(Long id) {
         client
@@ -53,8 +49,8 @@ public class ScrapperClient {
             .block();
     }
 
-    public LinkResponse addLinkTracking(Long id, AddLinksRequest response) {
-        return client
+    public void addLinkTracking(Long id, AddLinksRequest response) {
+        client
             .post()
             .uri(LINKS_PATH)
             .header(TG_CHAT_HEADER, String.valueOf(id))
@@ -64,12 +60,12 @@ public class ScrapperClient {
             .block();
     }
 
-    public LinkResponse removeLinkTracking(Long id, RemoveLinksRequest response) {
-        return client
+    public void removeLinkTracking(Long id, RemoveLinksRequest response) {
+        client
             .method(HttpMethod.DELETE)
             .uri(LINKS_PATH)
             .header(TG_CHAT_HEADER, String.valueOf(id))
-            .bodyValue(response) // TODO WITHOUT BODY
+            .bodyValue(response)
             .retrieve()
             .bodyToMono(LinkResponse.class)
             .block();
