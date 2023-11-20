@@ -5,6 +5,7 @@ import com.pengrad.telegrambot.request.SendMessage;
 import io.github.pvkvetkin.bot.client.ScrapperClient;
 import io.github.pvkvetkin.bot.dto.request.RemoveLinksRequest;
 import java.net.URI;
+import io.micrometer.observation.annotation.Observed;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -25,6 +26,7 @@ public class UntrackCommand implements Command {
     }
 
     @Override
+    @Observed
     public SendMessage handle(Update update) {
         Long chatId = update.message().chat().id();
         String link = update.message().text().split(" ")[1];

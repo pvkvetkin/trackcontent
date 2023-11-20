@@ -6,6 +6,7 @@ import com.pengrad.telegrambot.request.SendMessage;
 import io.github.pvkvetkin.bot.client.ScrapperClient;
 import io.github.pvkvetkin.bot.dto.request.AddLinksRequest;
 import java.net.URI;
+import io.micrometer.observation.annotation.Observed;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -37,6 +38,7 @@ public class TrackCommand implements Command, ReplyCommand {
     }
 
     @Override
+    @Observed
     public SendMessage handle(Update update) {
         if (!canProcessReply(update)) {
             return requestReply(update);

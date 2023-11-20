@@ -7,6 +7,7 @@ import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.BaseRequest;
 import com.pengrad.telegrambot.request.SetMyCommands;
 import com.pengrad.telegrambot.response.BaseResponse;
+import io.micrometer.observation.annotation.Observed;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import java.util.List;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @AllArgsConstructor
+@Observed
 public class TelegramBotListener implements AutoCloseable, UpdatesListener {
 
     private final TelegramBot bot;

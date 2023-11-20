@@ -3,6 +3,7 @@ package io.github.pvkvetkin.bot.wrapper.command;
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
 import java.util.List;
+import io.micrometer.observation.annotation.Observed;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -23,6 +24,7 @@ public class HelpCommand implements Command {
     }
 
     @Override
+    @Observed
     public SendMessage handle(Update update) {
         Long chatId = update.message().chat().id();
         StringBuilder sb = new StringBuilder();

@@ -4,12 +4,16 @@ import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
 import io.github.pvkvetkin.bot.client.ScrapperClient;
 import io.github.pvkvetkin.bot.dto.response.LinkResponse;
-import java.util.List;
+import io.micrometer.observation.annotation.Observed;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 @AllArgsConstructor
+@Slf4j
 public class ListCommand implements Command {
 
     private final ScrapperClient scrapperClient;
@@ -25,6 +29,7 @@ public class ListCommand implements Command {
     }
 
     @Override
+    @Observed
     public SendMessage handle(Update update) {
         Long chatId = update.message().chat().id();
         List<LinkResponse> linkResponses = scrapperClient.getAllTrackedLinks(chatId).items();
