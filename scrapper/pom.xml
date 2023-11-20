@@ -22,7 +22,19 @@
         <testcontainers.version>1.19.1</testcontainers.version>
         <jackson-core.version>2.13.1</jackson-core.version>
         <link-parser.version>0.0.1-SNAPSHOT</link-parser.version>
-        <jooq.version>3.16.3</jooq.version>
+        <jooq.version>3.18.7</jooq.version>
+        <lombok.version>1.18.24</lombok.version>
+        <slf4j.version>2.0.7</slf4j.version>
+        <opentelemetry-api.version>1.31.0</opentelemetry-api.version>
+        <micrometer-registry-otlp.version>1.12.0</micrometer-registry-otlp.version>
+        <micrometer-tracing-bridge-otel.version>1.2.0</micrometer-tracing-bridge-otel.version>
+        <opentelemetry-exporter-otlp.version>1.31.0</opentelemetry-exporter-otlp.version>
+        <opentelemetry-exporter-common.version>1.31.0</opentelemetry-exporter-common.version>
+        <opentelemetry-logback-appender.version>1.31.0-alpha</opentelemetry-logback-appender.version>
+        <opentelemetry-sdk.version>1.31.0</opentelemetry-sdk.version>
+        <opentelemetry-instrumentation-api-semconv.version>1.31.0-alpha</opentelemetry-instrumentation-api-semconv.version>
+        <opentelemetry-exporter-otlp-common.version>1.31.0</opentelemetry-exporter-otlp-common.version>
+
     </properties>
     <dependencies>
         <dependency>
@@ -47,11 +59,6 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-indexer</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
         <dependency>
@@ -122,6 +129,7 @@
         <dependency>
             <groupId>org.jooq</groupId>
             <artifactId>jooq</artifactId>
+            <version>${jooq.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -134,6 +142,70 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jooq</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-otlp</artifactId>
+            <scope>runtime</scope>
+            <version>${micrometer-registry-otlp.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.opentelemetry</groupId>
+            <artifactId>opentelemetry-api</artifactId>
+            <version>${opentelemetry-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-tracing-bridge-otel</artifactId>
+            <version>${micrometer-tracing-bridge-otel.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.opentelemetry</groupId>
+            <artifactId>opentelemetry-exporter-otlp</artifactId>
+            <version>${opentelemetry-exporter-otlp.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.opentelemetry</groupId>
+            <artifactId>opentelemetry-exporter-common</artifactId>
+            <version>${opentelemetry-exporter-common.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.opentelemetry.instrumentation</groupId>
+            <artifactId>opentelemetry-logback-appender-1.0</artifactId>
+            <version>${opentelemetry-logback-appender.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.opentelemetry</groupId>
+            <artifactId>opentelemetry-sdk</artifactId>
+            <version>${opentelemetry-sdk.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.opentelemetry.instrumentation</groupId>
+            <artifactId>opentelemetry-instrumentation-api-semconv</artifactId>
+            <version>${opentelemetry-instrumentation-api-semconv.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.opentelemetry</groupId>
+            <artifactId>opentelemetry-exporter-otlp-common</artifactId>
+            <version>${opentelemetry-exporter-otlp-common.version}</version>
         </dependency>
     </dependencies>
 
