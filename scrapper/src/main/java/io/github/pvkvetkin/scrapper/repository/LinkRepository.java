@@ -1,9 +1,9 @@
 package io.github.pvkvetkin.scrapper.repository;
 
-import io.github.pvkvetkin.scrapper.dto.LinkType;
 import io.github.pvkvetkin.scrapper.dto.response.GithubResponse;
 import io.github.pvkvetkin.scrapper.dto.response.StackoverflowResponse;
 import io.github.pvkvetkin.scrapper.entity.Link;
+import io.github.pvkvetkin.scrapper.entity.LinkType;
 
 import java.net.URI;
 import java.time.OffsetDateTime;

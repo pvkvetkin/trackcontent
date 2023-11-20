@@ -1,9 +1,10 @@
 package io.github.pvkvetkin.scrapper.repository;
 
-import io.github.pvkvetkin.scrapper.dto.LinkType;
 import io.github.pvkvetkin.scrapper.dto.response.GithubResponse;
 import io.github.pvkvetkin.scrapper.dto.response.StackoverflowResponse;
 import io.github.pvkvetkin.scrapper.entity.Link;
+import io.github.pvkvetkin.scrapper.entity.LinkType;
+import io.micrometer.observation.annotation.Observed;
 import java.net.URI;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
@@ -19,6 +20,7 @@ import static io.github.pvkvetkin.scrapper.domain.jooq.Tables.STACKOVERFLOW_LINK
 
 @Repository
 @AllArgsConstructor
+@Observed
 public class JooqLinkRepository implements LinkRepository {
 
     private final DSLContext context;

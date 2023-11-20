@@ -9,6 +9,7 @@ import io.github.pvkvetkin.scrapper.entity.Link;
 import io.github.pvkvetkin.scrapper.exception.InvalidUrlException;
 import io.github.pvkvetkin.scrapper.exception.LinkNotFoundException;
 import io.github.pvkvetkin.scrapper.service.LinkService;
+import io.micrometer.observation.annotation.Observed;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -39,6 +40,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/links")
+@Observed
 public class LinkController {
 
     private final LinkService linkService;
@@ -118,4 +120,3 @@ public class LinkController {
         ), HttpStatus.NOT_FOUND);
     }
 }
-

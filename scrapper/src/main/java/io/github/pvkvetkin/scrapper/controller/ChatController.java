@@ -4,6 +4,7 @@ import io.github.pvkvetkin.scrapper.dto.response.ApiErrorResponse;
 import io.github.pvkvetkin.scrapper.exception.DuplicateChatIdException;
 import io.github.pvkvetkin.scrapper.exception.TgChatIdNotFound;
 import io.github.pvkvetkin.scrapper.service.ChatService;
+import io.micrometer.observation.annotation.Observed;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -30,6 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/tg-chat/{id}")
+@Observed
 public class ChatController {
 
     private final ChatService chatService;
