@@ -16,7 +16,7 @@
 		<project.build.finalName>bot</project.build.finalName>
         <swagger.annotations.version>2.2.16</swagger.annotations.version>
         <java-telegram-bot-api.version>6.9.0</java-telegram-bot-api.version>
-        <lombok.version>1.18.24</lombok.version>
+        <lombok.version>1.18.30</lombok.version>
         <slf4j.version>2.0.7</slf4j.version>
         <opentelemetry-api.version>1.31.0</opentelemetry-api.version>
         <micrometer-registry-otlp.version>1.12.0</micrometer-registry-otlp.version>
