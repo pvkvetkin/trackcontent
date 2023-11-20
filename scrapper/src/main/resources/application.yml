@@ -1,16 +1,22 @@
 app:
   scheduler:
-    interval-ms: ${SCHEDULE_INTEVAL_MS:59000}
+    interval-ms: ${SCHEDULE_INTERVAL_MS:59000}
   tg-bot-base-url: ${TG_BOT_BASE_URL:http://localhost:8081/}
   rabbitmq:
     exchange-name: ${EXCHANGE_NAME:scrapper}
     queue-name: ${QUEUE_NAME:scrapper}
+  oltp-receiver-url: ${OLTP_RECEIVER_URL:http://localhost:4317}
 springdoc:
   swagger-ui:
     path: /swagger-ui
+server:
+  port: ${SERVER_PORT:8080}
 client:
-  github-url: https://api.github.com
-  stackoverflow-url: https://api.stackexchange.com
+  github:
+    github-url: https://api.github.com
+    github-token: ${GITHUB_TOKEN}
+  stackoverflow:
+    stackoverflow-url: https://api.stackexchange.com
 spring:
   datasource:
     url: ${DATABASE_URL:jdbc:postgresql://localhost:5433/scrapper}
@@ -19,5 +25,34 @@ spring:
     driver-class-name: org.postgresql.Driver
   liquibase:
     enabled: false
-server:
-  port: ${SERVER_PORT:8080}
+  application:
+    name: scrapper-app
+management:
+  server:
+    port: ${SERVER_PORT:8082}
+  endpoints:
+    web:
+      base-path: /
+      exposure:
+        include: "info,health,prometheus"
+      path-mapping:
+        prometheus: metrics
+  metrics:
+    tags:
+      application: ${spring.application.name}
+  otlp:
+    metrics:
+      export:
+        url: http://localhost:4318/v1/metrics
+        step: 10s
+    tracing:
+      endpoint: http://localhost:4318/v1/traces
+      export:
+        step: 10s
+  tracing:
+    sampling:
+      probability: 1.0
+logging:
+  pattern:
+    level: '%5p[${spring.application.name:},%X{traceId:-},%X{spanId:-}]'
+

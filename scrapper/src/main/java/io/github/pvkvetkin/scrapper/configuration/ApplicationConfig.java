@@ -14,7 +14,8 @@ import org.springframework.validation.annotation.Validated;
 public record ApplicationConfig(
     @NotNull Scheduler scheduler,
     @NotNull String tgBotBaseUrl,
-    @NotNull Rabbitmq rabbitmq
+    @NotNull Rabbitmq rabbitmq,
+    @NotNull String oltpReceiverUrl
 ) {
 
     @Bean
