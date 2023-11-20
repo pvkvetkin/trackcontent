@@ -1,7 +1,7 @@
 package io.github.pvkvetkin.scrapper.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.github.pvkvetkin.scrapper.dto.LinkType;
+import io.github.pvkvetkin.scrapper.entity.LinkType;
 import java.time.OffsetDateTime;
 import java.util.Objects;
 

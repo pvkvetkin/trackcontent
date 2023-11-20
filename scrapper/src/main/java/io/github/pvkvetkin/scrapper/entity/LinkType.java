@@ -1,4 +1,4 @@
-package io.github.pvkvetkin.scrapper.dto;
+package io.github.pvkvetkin.scrapper.entity;
 
 public enum LinkType {
     GITHUB,

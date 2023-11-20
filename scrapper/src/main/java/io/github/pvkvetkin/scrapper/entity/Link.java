@@ -1,6 +1,5 @@
 package io.github.pvkvetkin.scrapper.entity;
 
-import io.github.pvkvetkin.scrapper.dto.LinkType;
 import jakarta.persistence.*;
 import java.net.URI;
 import java.time.OffsetDateTime;
