@@ -8,19 +8,22 @@ import org.springframework.web.reactive.function.client.WebClient;
 public class GithubWebClient {
 
     private final WebClient client;
+    private final String GITHUB_TOKEN;
 
-    public GithubWebClient(String baseUrl) {
+    public GithubWebClient(String baseUrl, String token) {
         client = WebClient.create(baseUrl);
+        GITHUB_TOKEN = token;
     }
 
     public GithubResponse fetchRepository(String username, String repository) {
         return client
-                .get()
-                .uri(uf -> uf
-                        .path("/repos/{username}/{repository}")
-                        .build(username, repository))
-                .retrieve()
-                .bodyToMono(GithubResponse.class)
-                .block();
+            .get()
+            .uri(uf -> uf
+                .path("/repos/{username}/{repository}")
+                .build(username, repository))
+            .headers(httpHeaders -> httpHeaders.setBearerAuth(GITHUB_TOKEN))
+            .retrieve()
+            .bodyToMono(GithubResponse.class)
+            .block();
     }
 }
