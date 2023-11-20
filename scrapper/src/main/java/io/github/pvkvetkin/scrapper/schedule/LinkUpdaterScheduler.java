@@ -24,17 +24,17 @@ public class LinkUpdaterScheduler implements LinkUpdater {
     private final LinkService linkService;
     private final HttpContentLinkParser httpContentLinkParser;
 
+    @Override
     @Scheduled(fixedDelayString = "#{@schedulerIntervalMs}")
     public void update() {
         List<Link> notUpdatedLinks = linkService.getAllNotUpdatedLinks(1L);
-        log.info("notUpdatedLinks = " + notUpdatedLinks);
         if (!notUpdatedLinks.isEmpty()) {
             for (Link link : notUpdatedLinks) {
                 ContentResponse contentResponse = httpContentLinkParser.parseLink(link.getUrl().toString());
                 LinkUpdateRequest request = linkService.updateLinkData(link.getId(), contentResponse);
                 if (request != null) {
                     updateSender.sentUpdate(request);
-                    log.info(request.toString());
+                    log.info("Link update request sent for link: " + link.getUrl());
                 } else {
                     log.info("No changes for link: " + link.getUrl());
                 }
