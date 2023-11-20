@@ -10,7 +10,9 @@ import java.util.List;
 public interface LinkService {
 
     LinkResponse add(Long tgChatId, URI uri);
+
     LinkResponse remove(Long tgChatId, URI uri);
+
     List<Link> getAllTrackedLinks(Long tgChatId);
 
     List<Link> getAllNotUpdatedLinks(Long delayMinutes);

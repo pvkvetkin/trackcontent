@@ -8,8 +8,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 
 @SpringBootApplication()
 @EnableConfigurationProperties({
-        ApplicationConfig.class,
-        ContentClientConfig.class
+    ApplicationConfig.class,
+    ContentClientConfig.class
 })
 public class ScrapperApplication {
 
