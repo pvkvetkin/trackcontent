@@ -11,7 +11,7 @@ on:
 env:
   REGISTRY: 'ghcr.io'
   USERNAME: ${{ github.actor }}
-  IMAGE_NAME: 'scrapperapp:latest'
+  IMAGE_NAME: 'scrapper-app:latest'
 
 jobs:
   checkstyle:
@@ -37,7 +37,9 @@ jobs:
           distribution: 'corretto'
           cache: maven
       - name: Build with Maven
-        run: mvn package -pl scrapper --GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}-am
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: mvn package -pl scrapper -am
       - name: Login with Github Container registry
         uses: docker/login-action@v2
         with:
