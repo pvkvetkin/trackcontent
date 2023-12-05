@@ -69,10 +69,10 @@ jobs:
 
             echo "Copying Docker Compose file to the remote machine"
             echo "${{ secrets.SSHKEY }}" > key.pem
-            scp -i key.pem docker-compose.yml ${{ secrets.HOST_USERNAME }}@${{ secrets.HOST }}:/scrapper
+            scp -i key.pem /scrapper/docker-compose.yml ${{ secrets.HOST_USERNAME }}@${{ secrets.HOST }}:/scrapper
 
             echo "Deploying Docker Compose on the remote machine"
-            ssh -i key.pem ${{ secrets.HOST_USERNAME }}@${{ secrets.HOST }} "cd /scrapper && docker-compose up -d"
+            cd /scrapper && docker-compose up -d
 
             echo "Running a new container from the new image"
             docker run -d \
