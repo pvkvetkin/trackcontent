@@ -53,21 +53,20 @@ jobs:
     needs: build
     steps:
       - name: Deploy to Digital Ocean droplet via SSH action
-        uses: appleboy/ssh-action@v0.1.3
+        uses: appleboy/ssh-action@v1.0.0
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.HOST_USERNAME }}
           key: ${{ secrets.SSHKEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
-          envs: IMAGE_NAME,REGISTRY,{{ secrets.GITHUB_TOKEN }}
           script: |
             # Login to registry
-            docker login -u ${{ env.USERNAME }} -p ${{ secrets.GITHUB_TOKEN }} ${{env.REGISTRY}}
+            docker login -u ${{ env.USERNAME }} -p ${{ secrets.GITHUB_TOKEN }} ${{ env.REGISTRY }}
             # Stop running container
-            docker stop $(echo $IMAGE_NAME)
+            docker stop $${{ $IMAGE_NAME }}
             # Remove old container
-            docker rm $(echo $IMAGE_NAME)
+            docker rm ${{ $IMAGE_NAME }}
             # Run a new container from a new image
             docker run -d \
             --restart always \
-            --name $(echo $IMAGE_NAME)
+            --name ${{ $IMAGE_NAME }}
