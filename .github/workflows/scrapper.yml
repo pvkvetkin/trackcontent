@@ -52,15 +52,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - name: Debug SSH Secrets
-        run: |
-          echo "HOST: ${{ secrets.HOST }}"
-          echo "HOST_USERNAME: ${{ secrets.HOST_USERNAME }}"
-          echo "SSHKEY: ${{ secrets.SSHKEY }}"
-          echo "PASSPHRASE: ${{ secrets.PASSPHRASE }}"
-          echo "USERNAME: ${{ secrets.USERNAME }}"
-          echo "REGISTRY: ${{ secrets.REGISTRY }}"
-          echo "GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}"
       - name: Deploy to Digital Ocean droplet via SSH action
         uses: appleboy/ssh-action@v0.1.3
         with:
@@ -71,7 +62,7 @@ jobs:
           envs: IMAGE_NAME,REGISTRY,{{ secrets.GITHUB_TOKEN }}
           script: |
             # Login to registry
-            docker login -u ${{ secrets.USERNAME }} -p ${{ secrets.GITHUB_TOKEN }} ${{secrets.REGISTRY}}
+            docker login -u ${{ env.USERNAME }} -p ${{ secrets.GITHUB_TOKEN }} ${{env.REGISTRY}}
             # Stop running container
             docker stop $(echo $IMAGE_NAME)
             # Remove old container
