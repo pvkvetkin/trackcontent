@@ -59,7 +59,7 @@ jobs:
           username: ${{ secrets.HOST_USERNAME }}
           key: ${{ secrets.SSHKEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
-          source: "/scrapper/docker-compose.yml"
+          source: "scrapper/docker-compose.yml"
           target: /scrapper
       - name: Deploy to Digital Ocean droplet via SSH action
         uses: appleboy/ssh-action@v1.0.0
