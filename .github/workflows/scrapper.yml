@@ -60,13 +60,15 @@ jobs:
           key: ${{ secrets.SSHKEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
           script: |
-            # Login to registry
-            docker login -u ${{ env.USERNAME }} -p ${{ secrets.GITHUB_TOKEN }} ${{ env.REGISTRY }}
-            # Stop running container
-            docker stop $${{ env.IMAGE_NAME }}
-            # Remove old container
+            echo "Logging in to Docker registry"
+            echo ${{ secrets.GITHUB_TOKEN }} | docker login -u ${{ env.USERNAME }} --password-stdin ${{ env.REGISTRY }}
+
+            echo "Stopping and removing old container"
+            docker stop ${{ env.IMAGE_NAME }}
             docker rm ${{ env.IMAGE_NAME }}
-            # Run a new container from a new image
+
+            echo "Running a new container from the new image"
             docker run -d \
             --restart always \
-            --name ${{ env.IMAGE_NAME }}
+            --name ${{ env.IMAGE_NAME }} \
+            ${{ env.REGISTRY }}/${{ env.USERNAME }}/${{ env.IMAGE_NAME }}
