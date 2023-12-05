@@ -70,5 +70,4 @@ jobs:
             echo "Running a new container from the new image"
             docker run -d \
             --restart always \
-            --name ${{ env.IMAGE_NAME }} \
             ${{ env.REGISTRY }}/${{ env.USERNAME }}/${{ env.IMAGE_NAME }}
