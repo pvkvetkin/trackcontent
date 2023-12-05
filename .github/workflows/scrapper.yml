@@ -61,7 +61,7 @@ jobs:
           username: ${{ secrets.HOST_USERNAME }}
           key: ${{ secrets.SSHKEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
-          source: "scrapper/migrations/*"
+          source: "scrapper/migrations"
           target: /root/scrapper/migrations/
       - name: Copying Docker Compose file to the remote machine
         uses: appleboy/scp-action@v0.1.4
