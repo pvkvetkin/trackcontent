@@ -63,10 +63,10 @@ jobs:
             # Login to registry
             docker login -u ${{ env.USERNAME }} -p ${{ secrets.GITHUB_TOKEN }} ${{ env.REGISTRY }}
             # Stop running container
-            docker stop $${{ $IMAGE_NAME }}
+            docker stop $${{ env.IMAGE_NAME }}
             # Remove old container
-            docker rm ${{ $IMAGE_NAME }}
+            docker rm ${{ env.IMAGE_NAME }}
             # Run a new container from a new image
             docker run -d \
             --restart always \
-            --name ${{ $IMAGE_NAME }}
+            --name ${{ env.IMAGE_NAME }}
