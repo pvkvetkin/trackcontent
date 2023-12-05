@@ -11,7 +11,7 @@ on:
 env:
   REGISTRY: 'ghcr.io'
   USERNAME: ${{ github.actor }}
-  IMAGE_NAME: 'scrapper_app:latest'
+  IMAGE_NAME: 'scrapperapp:latest'
 
 jobs:
   checkstyle:
