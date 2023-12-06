@@ -61,16 +61,15 @@ jobs:
           cp scrapper/docker-compose.yml ../build
           mkdir ../build/migrations
           cp scrapper/migrations/* ../build/migrations
-          tar -cvf deploy.tar ../build/
       - name: Copying migrations and compose file to the remote machine
-        uses: appleboy/scp-action@v0.1.4
+        uses: garygrossgarten/github-action-scp@v0.8.0
         with:
+          local: ../build
+          remote: ~/scrapper
           host: ${{ secrets.HOST }}
           username: ${{ secrets.HOST_USERNAME }}
-          key: ${{ secrets.SSHKEY }}
+          privateKey: ${{ secrets.SSHKEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
-          source: "deploy.tar"
-          target: "/root/scrapper/"
       - name: Deploy to Digital Ocean droplet via SSH action
         uses: appleboy/ssh-action@v1.0.0
         with:
