@@ -62,7 +62,7 @@ jobs:
           key: ${{ secrets.SSHKEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
           source: "scrapper/docker-compose.yml"
-          target: "/root/scrapper"
+          target: "/root/scrapper/"
       - uses: actions/checkout@v3
       - name: Copying migrations to the remote machine
         uses: appleboy/scp-action@v0.1.4
@@ -72,7 +72,7 @@ jobs:
           key: ${{ secrets.SSHKEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
           source: "scrapper/migrations/."
-          target: "/root/scrapper/migrations"
+          target: "/root/scrapper/migrations/"
       - name: Deploy to Digital Ocean droplet via SSH action
         uses: appleboy/ssh-action@v1.0.0
         with:
