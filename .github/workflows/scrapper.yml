@@ -37,8 +37,6 @@ jobs:
           distribution: 'corretto'
           cache: maven
       - name: Build with Maven
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: mvn package -pl scrapper -am
       - name: Login with Github Container registry
         uses: docker/login-action@v2
@@ -81,5 +79,5 @@ jobs:
             cd scrapper
             docker-compose stop scrapper-app
             docker rm scrapper-app
-            POSTGRES_HOST=${{ secrets.HOST }} docker-compose up -d
+            POSTGRES_HOST=${{ secrets.HOST }} GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} docker-compose up -d
             docker ps -a

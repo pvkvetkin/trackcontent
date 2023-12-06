@@ -37,9 +37,6 @@ jobs:
           distribution: 'corretto'
           cache: maven
       - name: Build with Maven
-        env:
-          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
-          SCRAPPER_BASE_URL: ${{ secrets.HOST }}
         run: mvn package -pl bot -am
       - name: Login with Github Container registry
         uses: docker/login-action@v2
@@ -70,4 +67,4 @@ jobs:
           passphrase: ${{ secrets.PASSPHRASE }}
           script: |
             echo ${{ secrets.GITHUB_TOKEN }} | docker login -u ${{ env.USERNAME }} --password-stdin ${{ env.REGISTRY }}
-            docker run -d ${{ env.REGISTRY }}/${{ env.USERNAME }}/${{ env.IMAGE_NAME }}
+            docker run -d -e TG_BOT_TOKEN=${{ secrets.TG_BOT_TOKEN }} ${{ env.REGISTRY }}/${{ env.USERNAME }}/${{ env.IMAGE_NAME }}
