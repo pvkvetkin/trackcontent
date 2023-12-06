@@ -64,15 +64,22 @@ jobs:
           source: "scrapper/docker-compose.yml"
           target: "/root/scrapper/"
       - uses: actions/checkout@v3
-      - name: Copying migrations to the remote machine
+      - name: Run a multi-line script
+        run: |
+          mkdir ../build
+          cp scrapper/docker-compose.yml ../build
+          mkdir ../build/migrations
+          cp scrapper/migrations/* ../build/migrations
+          tar -cvf deploy.tar ../build/
+      - name: Copying migrations and compose file to the remote machine
         uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.HOST_USERNAME }}
           key: ${{ secrets.SSHKEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
-          source: "scrapper/migrations/."
-          target: "/root/scrapper/migrations/"
+          source: "deploy.tar"
+          target: "/root/scrapper/"
       - name: Deploy to Digital Ocean droplet via SSH action
         uses: appleboy/ssh-action@v1.0.0
         with:
